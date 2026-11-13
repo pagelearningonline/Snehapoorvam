@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snehapoorvam Registration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter Tight', sans-serif;
+      background: #dce7f7;
+      min-height: 100vh;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ===== Background Decoration ===== */
+    .bg-decoration {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .bg-circle-1 {
+      width: 320px; height: 320px;
+      top: -80px; left: -100px;
+      background: rgba(30, 64, 175, 0.06);
+      border: 3px solid rgba(30, 64, 175, 0.12);
+    }
+
+    .bg-circle-2 {
+      width: 200px; height: 200px;
+      bottom: 60px; left: -40px;
+      background: rgba(37, 99, 235, 0.07);
+      border: 3px solid rgba(37, 99, 235, 0.13);
+    }
+
+    .bg-circle-3 {
+      width: 400px; height: 400px;
+      top: -120px; right: -150px;
+      background: rgba(30, 64, 175, 0.05);
+      border: 3px solid rgba(30, 64, 175, 0.10);
+    }
+
+    .bg-circle-4 {
+      width: 260px; height: 260px;
+      bottom: -60px; right: -80px;
+      background: rgba(37, 99, 235, 0.06);
+      border: 3px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .bg-circle-5 {
+      width: 140px; height: 140px;
+      top: 50%; left: 5%;
+      background: rgba(59, 130, 246, 0.08);
+      border: 2px solid rgba(59, 130, 246, 0.14);
+    }
+
+    .bg-circle-6 {
+      width: 100px; height: 100px;
+      top: 30%; right: 8%;
+      background: rgba(30, 64, 175, 0.07);
+      border: 2px solid rgba(30, 64, 175, 0.13);
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+      background: #ffffff;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #1e3a6e;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+      color: #1e3a6e;
+    }
+
+    .logo-text span {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      opacity: 0.6;
+      letter-spacing: 0;
+      color: #475569;
+    }
+
+    .whatsapp-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #1e3a6e;
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .whatsapp-btn:hover {
+      opacity: 0.9;
+    }
+
+    .whatsapp-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: #25D366;
+    }
+
+    /* ===== Main Content ===== */
+    .main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ===== Form Card ===== */
+    .form-card {
+      width: 100%;
+      max-width: 560px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(30, 64, 175, 0.10), 0 1px 3px rgba(0,0,0,0.06);
+      overflow: hidden;
+      animation: cardSlideUp 0.6s ease-out;
+    }
+
+    @keyframes cardSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Scenery Header ===== */
+    .scenery-header {
+      position: relative;
+      width: 100%;
+      height: 170px;
+      overflow: hidden;
+      background: linear-gradient(175deg, #0a1628 0%, #102a52 40%, #1a4a8a 100%);
+    }
+
+    .badge-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: -18px;
+      z-index: 5;
+      margin-bottom: 8px;
+    }
+
+    .scenery-header svg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .title-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: #fff;
+      padding: 10px 32px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+      text-align: center;
+    }
+
+    /* ===== Form ===== */
+    .form-body {
+      padding: 40px 36px 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 11px 14px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 14px;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group input::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+      background: #fff;
+    }
+
+    /* Select dropdown arrow */
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid #64748b;
+      pointer-events: none;
+    }
+
+    .select-wrapper select {
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    .select-wrapper select option[value=""] {
+      color: #94a3b8;
+    }
+
+    /* Phone input with prefix */
+    .phone-input-wrapper {
+      display: flex;
+      align-items: stretch;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8fafc;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .phone-input-wrapper:focus-within {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+      background: #fff;
+    }
+
+    .phone-prefix {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      background: #1e3a6e;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      min-width: 48px;
+      user-select: none;
+    }
+
+    .phone-input-wrapper input {
+      border: none !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      flex: 1;
+    }
+
+    .phone-input-wrapper input:focus {
+      box-shadow: none !important;
+    }
+
+    /* ===== Submit Button ===== */
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #1e3a6e, #1d4ed8);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.92;
+    }
+
+    .submit-btn:active {
+      transform: scale(0.99);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .submit-btn .btn-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .spinner.active { display: inline-block; }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Success / Error Messages ===== */
+    .message-overlay {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 36px;
+    }
+
+    .message-overlay.active {
+      display: flex;
+    }
+
+    .message-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .message-icon.success {
+      background: #dcfce7;
+    }
+
+    .message-icon.error {
+      background: #fee2e2;
+    }
+
+    .message-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .message-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+
+    .message-text {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    .retry-btn {
+      margin-top: 24px;
+      padding: 10px 28px;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: #1d4ed8;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .retry-btn:hover { opacity: 0.9; }
+
+    /* ===== Footer ===== */
+    .footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 18px;
+      font-size: 12px;
+      color: #64748b;
+      background: #1e3a6e;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .navbar { padding: 12px 16px; }
+      .logo-text { font-size: 14px; }
+      .logo-text span { font-size: 10px; }
+      .whatsapp-btn span { display: none; }
+      .main { padding: 28px 14px 40px; }
+      .form-body { padding: 36px 22px 26px; }
+      .scenery-header { height: 140px; }
+      .title-badge { font-size: 13px; padding: 9px 22px; }
+      .bg-circle-1 { width: 200px; height: 200px; }
+      .bg-circle-3 { width: 250px; height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Decoration Circles -->
+  <div class="bg-decoration">
+    <div class="bg-circle bg-circle-1"></div>
+    <div class="bg-circle bg-circle-2"></div>
+    <div class="bg-circle bg-circle-3"></div>
+    <div class="bg-circle bg-circle-4"></div>
+    <div class="bg-circle bg-circle-5"></div>
+    <div class="bg-circle bg-circle-6"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <img src="logo.png" alt="Snehapoorvam Logo">
+      </div>
+      <div class="logo-text">
+        Snehapoorvam
+        <span>Career Orientation Seminar</span>
+      </div>
+    </a>
+    <a href="https://wa.me/" target="_blank" class="whatsapp-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span>WhatsApp Us</span>
+    </a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="form-card">
+
+      <!-- Scenery Header with Mountain Landscape -->
+      <div class="scenery-header">
+        <svg viewBox="0 0 600 170" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#070d1f"/>
+              <stop offset="50%" stop-color="#0f2247"/>
+              <stop offset="100%" stop-color="#1a4a8a"/>
+            </linearGradient>
+            <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#14365f"/>
+              <stop offset="100%" stop-color="#0f2247"/>
+            </linearGradient>
+            <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="rgba(255,250,200,0.3)"/>
+              <stop offset="100%" stop-color="rgba(255,250,200,0)"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Sky -->
+          <rect fill="url(#skyGrad)" width="600" height="170"/>
+
+          <!-- Stars -->
+          <circle cx="45" cy="22" r="1.2" fill="#fff" opacity="0.9"/>
+          <circle cx="120" cy="15" r="0.8" fill="#fff" opacity="0.6"/>
+          <circle cx="180" cy="35" r="1" fill="#fff" opacity="0.8"/>
+          <circle cx="250" cy="12" r="1.3" fill="#fff" opacity="0.7"/>
+          <circle cx="310" cy="28" r="0.7" fill="#fff" opacity="0.5"/>
+          <circle cx="370" cy="18" r="1.1" fill="#fff" opacity="0.9"/>
+          <circle cx="430" cy="38" r="0.9" fill="#fff" opacity="0.6"/>
+          <circle cx="480" cy="10" r="1.2" fill="#fff" opacity="0.8"/>
+          <circle cx="540" cy="25" r="0.8" fill="#fff" opacity="0.7"/>
+          <circle cx="580" cy="42" r="1" fill="#fff" opacity="0.5"/>
+          <circle cx="75" cy="48" r="0.6" fill="#fff" opacity="0.4"/>
+          <circle cx="155" cy="55" r="0.9" fill="#fff" opacity="0.6"/>
+          <circle cx="350" cy="50" r="0.7" fill="#fff" opacity="0.5"/>
+          <circle cx="520" cy="55" r="1" fill="#fff" opacity="0.4"/>
+          <circle cx="205" cy="8" r="0.6" fill="#fff" opacity="0.7"/>
+          <circle cx="460" cy="45" r="0.5" fill="#fff" opacity="0.4"/>
+          <circle cx="95" cy="60" r="0.7" fill="#fff" opacity="0.3"/>
+          <circle cx="290" cy="42" r="0.8" fill="#fff" opacity="0.6"/>
+
+          <!-- Moon glow -->
+          <circle cx="490" cy="38" r="30" fill="url(#moonGlow)"/>
+          <!-- Crescent Moon -->
+          <circle cx="490" cy="38" r="14" fill="#fef3c7"/>
+          <circle cx="497" cy="33" r="11" fill="#0f2247"/>
+
+          <!-- Far mountains (lightest) -->
+          <polygon points="0,120 30,85 70,100 120,72 170,95 220,78 280,88 330,70 380,90 430,75 480,85 530,72 580,92 600,80 600,170 0,170" fill="#0d2b50" opacity="0.7"/>
+
+          <!-- Mid mountains -->
+          <polygon points="0,140 40,105 80,115 130,92 180,110 230,95 290,108 340,88 390,105 440,92 500,100 550,88 600,105 600,170 0,170" fill="#0f3460"/>
+
+          <!-- Near mountains (darkest, most prominent) -->
+          <polygon points="0,145 50,118 100,130 160,108 210,125 260,112 320,128 370,105 420,120 470,110 530,125 570,115 600,128 600,170 0,170" fill="#122d4f"/>
+
+          <!-- Coconut palm tree 1 -->
+          <g transform="translate(80, 108)">
+            <rect x="-2" y="0" width="4" height="40" rx="2" fill="#0a1e38"/>
+            <ellipse cx="0" cy="2" rx="3" ry="20" transform="rotate(-40)" fill="#0d3520" opacity="0.9"/>
+            <ellipse cx="0" cy="2" rx="3" ry="18" transform="rotate(30)" fill="#0e3d24" opacity="0.85"/>
+            <ellipse cx="0" cy="2" rx="2.5" ry="16" transform="rotate(-10)" fill="#0b3320" opacity="0.8"/>
+            <ellipse cx="0" cy="2" rx="2.5" ry="17" transform="rotate(65)" fill="#0d3822" opacity="0.75"/>
+            <ellipse cx="0" cy="2" rx="2" ry="15" transform="rotate(-70)" fill="#0c3320" opacity="0.7"/>
+          </g>
+
+          <!-- Coconut palm tree 2 -->
+          <g transform="translate(510, 112)">
+            <rect x="-2" y="0" width="4" height="36" rx="2" fill="#0a1e38"/>
+            <ellipse cx="0" cy="2" rx="2.5" ry="17" transform="rotate(-35)" fill="#0d3520" opacity="0.9"/>
+            <ellipse cx="0" cy="2" rx="2.5" ry="15" transform="rotate(40)" fill="#0e3d24" opacity="0.85"/>
+            <ellipse cx="0" cy="2" rx="2" ry="14" transform="rotate(-15)" fill="#0b3320" opacity="0.8"/>
+            <ellipse cx="0" cy="2" rx="2" ry="16" transform="rotate(70)" fill="#0d3822" opacity="0.75"/>
+          </g>
+
+          <!-- Water / lake -->
+          <rect y="148" width="600" height="22" fill="url(#waterGrad)" opacity="0.5"/>
+          <!-- Water reflections -->
+          <line x1="50" y1="155" x2="90" y2="155" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="200" y1="158" x2="260" y2="158" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <line x1="350" y1="153" x2="400" y2="153" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="450" y1="160" x2="520" y2="160" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="130" y1="162" x2="180" y2="162" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <line x1="480" y1="152" x2="510" y2="152" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Title Badge (outside scenery so it's not clipped) -->
+      <div class="badge-wrapper">
+        <div class="title-badge">Career Orientation Seminar Registration</div>
+      </div>
+
+      <!-- Form -->
+      <div class="form-body" id="formSection">
+        <form id="registrationForm" novalidate>
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="e.g. Arun, Priya, Anjali" required>
+          </div>
+
+          <!-- House / Address -->
+          <div class="form-group">
+            <label for="address">House / Address</label>
+            <input type="text" id="address" name="address" placeholder="e.g. #890 Indiranagar, Bengaluru 560008" required>
+          </div>
+
+          <!-- Stream -->
+          <div class="form-group">
+            <label for="stream">Stream</label>
+            <div class="select-wrapper">
+              <select id="stream" name="stream" required>
+                <option value="" disabled selected>Select your stream</option>
+                <option value="Science">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Humanities">Humanities</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- District -->
+          <div class="form-group">
+            <label for="district">District</label>
+            <div class="select-wrapper">
+              <select id="district" name="district" required>
+                <option value="" disabled selected>Select your district</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Kollam">Kollam</option>
+                <option value="Pathanamthitta">Pathanamthitta</option>
+                <option value="Alappuzha">Alappuzha</option>
+                <option value="Kottayam">Kottayam</option>
+                <option value="Idukki">Idukki</option>
+                <option value="Ernakulam">Ernakulam</option>
+                <option value="Thrissur">Thrissur</option>
+                <option value="Palakkad">Palakkad</option>
+                <option value="Malappuram">Malappuram</option>
+                <option value="Kozhikode">Kozhikode</option>
+                <option value="Wayanad">Wayanad</option>
+                <option value="Kannur">Kannur</option>
+                <option value="Kasaragod">Kasaragod</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="phone-input-wrapper">
+              <div class="phone-prefix">+91</div>
+              <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}" required>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <div class="btn-content">
+              <span class="spinner" id="spinner"></span>
+              <span id="btnText">Submit Registration</span>
+            </div>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success Message -->
+      <div class="message-overlay" id="successMessage">
+        <div class="message-icon success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <div class="message-title">Registration Successful!</div>
+        <p class="message-text">Thank you for registering with Snehapoorvam. We will get back to you soon.</p>
+        <button class="retry-btn" onclick="resetForm()">Submit Another Response</button>
+      </div>
+
+      <!-- Error Message -->
+      <div class="message-overlay" id="errorMessage">
+        <div class="message-icon error">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="15" y1="9" x2="9" y2="15"/>
+            <line x1="9" y1="9" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <div class="message-title">Something Went Wrong</div>
+        <p class="message-text">We couldn't process your registration. Please check your internet connection and try again.</p>
+        <button class="retry-btn" onclick="resetForm()">Try Again</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2026 Snehapoorvam. All rights reserved.
+  </footer>
+
+  <script>
+    // ========================================================
+    // CONFIGURATION
+    // Replace this URL after deploying your Google Apps Script
+    // ========================================================
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvFio10f6XiizEHlgI77lWV2KHD-cQ6nwcuVggLSNYcG1ti4f0E9fbX-DqQkmfsK9H/exec';
+
+    // ===== DOM Elements =====
+    const form = document.getElementById('registrationForm');
+    const formSection = document.getElementById('formSection');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btnText');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // ===== Phone Number Validation (digits only) =====
+    document.getElementById('phone').addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+
+    // ===== Form Submission =====
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Validate phone
+      const phone = document.getElementById('phone').value;
+      if (phone.length !== 10) {
+        alert('Please enter a valid 10-digit phone number.');
+        return;
+      }
+
+      // Collect form data
+      const formData = {
+        fullName: document.getElementById('fullName').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        stream: document.getElementById('stream').value,
+        district: document.getElementById('district').value,
+        phone: phone
+      };
+
+      // Show loading state
+      submitBtn.disabled = true;
+      spinner.classList.add('active');
+      btnText.textContent = 'Submitting...';
+
+      try {
+        // Send data to Google Apps Script backend
+        // Using text/plain to avoid CORS preflight
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(formData),
+          redirect: 'follow'
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          showSuccess();
+        } else {
+          showError();
+        }
+      } catch (err) {
+        // If using no-cors mode, fetch won't throw on success
+        // but we can't read the response. Try no-cors fallback.
+        try {
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(formData)
+          });
+          // Assume success since the request didn't throw
+          showSuccess();
+        } catch (fallbackErr) {
+          console.error('Submission failed:', fallbackErr);
+          showError();
+        }
+      }
+    });
+
+    function showSuccess() {
+      formSection.style.display = 'none';
+      errorMessage.classList.remove('active');
+      successMessage.classList.add('active');
+    }
+
+    function showError() {
+      submitBtn.disabled = false;
+      spinner.classList.remove('active');
+      btnText.textContent = 'Submit Registration';
+      formSection.style.display = 'none';
+      successMessage.classList.remove('active');
+      errorMessage.classList.add('active');
+    }
+
+    function resetForm() {
+      form.reset();
+      submitBtn.disabled = false;
+      spinner.classList.remove('active');
+      btnText.textContent = 'Submit Registration';
+      formSection.style.display = 'block';
+      successMessage.classList.remove('active');
+      errorMessage.classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>
+
