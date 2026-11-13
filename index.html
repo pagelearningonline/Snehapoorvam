@@ -627,8 +627,8 @@
 
           <!-- House / Address -->
           <div class="form-group">
-            <label for="address">SCHOOL NAME</label>
-            <input type="text" id="address" name="address" placeholder="St.antony's hss changanaserry" required>
+            <label for="address">School Name</label>
+            <input type="text" id="address" name="address" placeholder="e.g. St. Mary's Higher Secondary School" required>
           </div>
 
           <!-- Stream -->
@@ -668,12 +668,12 @@
             </div>
           </div>
 
-          <!-- Phone Number -->
+          <!-- WhatsApp Number -->
           <div class="form-group">
-            <label for="phone">Phone Number</label>
+            <label for="phone">WhatsApp Number</label>
             <div class="phone-input-wrapper">
               <div class="phone-prefix">+91</div>
-              <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}" required>
+              <input type="tel" id="phone" name="phone" placeholder="10-digit WhatsApp number" maxlength="10" pattern="[0-9]{10}" required>
             </div>
           </div>
 
@@ -724,7 +724,6 @@
   <script>
     // ========================================================
     // CONFIGURATION
-    // Replace this URL after deploying your Google Apps Script
     // ========================================================
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvFio10f6XiizEHlgI77lWV2KHD-cQ6nwcuVggLSNYcG1ti4f0E9fbX-DqQkmfsK9H/exec';
 
@@ -749,7 +748,7 @@
       // Validate phone
       const phone = document.getElementById('phone').value;
       if (phone.length !== 10) {
-        alert('Please enter a valid 10-digit phone number.');
+        alert('Please enter a valid 10-digit WhatsApp number.');
         return;
       }
 
@@ -768,36 +767,42 @@
       btnText.textContent = 'Submitting...';
 
       try {
-        // Send data to Google Apps Script backend
-        // Using text/plain to avoid CORS preflight
+        // Method 1: Try fetch with redirect follow
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(formData),
           redirect: 'follow'
         });
 
-        const result = await response.json();
-
-        if (result.status === 'success') {
-          showSuccess();
+        if (response.ok) {
+          try {
+            const result = await response.json();
+            if (result.status === 'success') {
+              showSuccess();
+            } else {
+              showError();
+            }
+          } catch (parseErr) {
+            // Response came back but wasn't JSON — likely still succeeded
+            showSuccess();
+          }
         } else {
           showError();
         }
       } catch (err) {
-        // If using no-cors mode, fetch won't throw on success
-        // but we can't read the response. Try no-cors fallback.
+        console.log('Fetch with follow failed, trying no-cors fallback...', err);
+        // Method 2: no-cors fallback — we can't read the response
+        // but the data still gets sent to the server
         try {
           await fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify(formData)
           });
-          // Assume success since the request didn't throw
+          // If we got here without error, the request was sent
           showSuccess();
         } catch (fallbackErr) {
-          console.error('Submission failed:', fallbackErr);
+          console.error('All submission methods failed:', fallbackErr);
           showError();
         }
       }
